@@ -17,8 +17,8 @@ def host_board():
     sock.connect((localhost, 4205)) # def IP address will be the local ip address of the hosting machine
 
 def join_board():
-    #asd
     print("nothing")
+    
 def show_board():
     game = ChessBoard()
     game.show()
