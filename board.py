@@ -48,7 +48,7 @@ class Board:
                 self.board.append(Square((x, y)))
 
 def main():
-    sys.path.insert(1, 'tests/')
+    sys.path.insert(1, 'tests/') # Add 'tests/' directory to the import path
     import testBoard
     
     testBoard.main()
