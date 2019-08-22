@@ -1,7 +1,7 @@
 import sys
 import unittest
 
-sys.path.insert(1, '..')
+sys.path.insert(1, '..')  # Add the above directory to the import path
 from board import Square
 from config import BOARD_WIDTH, BOARD_LENGTH
 
