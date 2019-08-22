@@ -1,28 +1,58 @@
-class ChessBoard:
+import sys
+from config import BOARD_WIDTH, BOARD_LENGTH
+from string import ascii_uppercase as alphabet
+
+class Square:
+    def is_valid(self, position):
+        x, y = position
+        return x <= Board.WIDTH and y <= Board.LENGTH
+
+    # Names are, for example, A1, B7, D3, etc.
+    def _get_name(self):
+        letter = alphabet[self.x - 1]  # Numbers greater than 26 not supported (yet)
+        number = self.y
+        return letter + str(number)
+
+    def _get_color(self):
+        is_even = lambda n: n % 2 == 0
+
+        if is_even(self.y):
+            return 'black' if is_even(self.x) else 'white'
+        else:
+            return 'white' if is_even(self.x) else 'black'
+
+    def __init__(self, position: tuple, name=None, color=None):
+        assert self.is_valid(position), "{} is not a valid position!".format(position)
+
+        self.position = position
+        self.x, self.y = position
+
+        if name is None:
+            name = self._get_name()
+
+        if color is None:
+            color = self._get_color()
+
+        self.name = name
+        self.color = color
+
+class Board:
+    WIDTH = BOARD_WIDTH
+    LENGTH = BOARD_LENGTH
+
     def __init__(self):
-        self.board = [[1] * 8 for i in range(8)]
-        rook = Rook("R", [])
-        self.board.insert(rook, [0][0])
-    def show():
-        print(self.board)
+        # TODO: Change to list comprehension
+        self.board = []
+        for x in range(BOARD_WIDTH):
+            for y in range(BOARD_LENGTH):
+                self.board.append(Square((x, y)))
 
-class Piece:
-    # TODO: Most likely create a class for each different piece inheriting Piece class
-    #       Then define their own validMove method since some pieces vary upon different scenarions i.e king cant castle through check
-    #       Move pattern, we have to define most likely a 2D array of possible coordinates to move at with the Piece being the origin (0,0)
-    #       This will define how far it can go, but its validMove method will consider if that piece can take over a piece, move to that, or if its an illegal move etc
-
-    def __init__(self, symbol="P", move_pattern): # default value will be P for pawn 
-        self.symbol = symbol
-        self.move_pattern = move_pattern
-
-    def illegalMove(move):
-
-    def promote(): # if pawn ask what unit to promote to and change its symbol and move pattern accordingly
-
-class Rook(Piece):
-
+def main():
+    sys.path.insert(1, 'tests/')
+    import testBoard
     
-    
+    testBoard.main()
 
 
+if __name__ == '__main__':
+    main()
